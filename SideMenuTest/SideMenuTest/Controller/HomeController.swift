@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol HomeControllerDelegate: AnyObject {
+    func didTapMenuButton()
+}
+
 final class HomeController: UIViewController {
     // MARK: - Properties
+    
+    weak var delegate: HomeControllerDelegate?
     
     // MARK: - Life Cycles
 
@@ -27,12 +33,12 @@ final class HomeController: UIViewController {
         
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationItem.title = "Home ViewController"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "sideMenuIcon")?.withTintColor(.white).withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(didTapMenuButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "sideMenuIcon")?.withTintColor(.white).withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(didTapMenuButton))
     }
     
     // MARK: - Actions
     
     @objc private func didTapMenuButton() {
-        
+        delegate?.didTapMenuButton()
     }
 }
