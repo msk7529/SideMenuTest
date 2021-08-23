@@ -28,15 +28,32 @@ final class ContainerViewController: UIViewController, SideMenuActionDelegate {
     }()
     
     private var rootViewController: (UIViewController & SideMenuSuportable)?
-    private var menuViewController: UIViewController!
+    private var menuViewController: MenuViewController!
     private var centerController: UIViewController!
-    private var isExpanded: Bool = false
+    
+    private var isMenuExpanded: Bool {
+        get {
+            return menuViewController == nil ? false : menuViewController.isExpanded
+        } set {
+            guard menuViewController != nil else { return }
+            menuViewController.isExpanded = newValue
+        }
+    }
+    
+    internal override var interfaceOrientation: UIInterfaceOrientation {
+        get {
+            guard let interfaceOrientation = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.windowScene?.interfaceOrientation else {
+                return .portrait
+            }
+            return interfaceOrientation
+        }
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-    // MARK: - Init
+    // MARK: - Init & Life Cycles
     init(rootViewController: UIViewController & SideMenuSuportable) {
         self.rootViewController = rootViewController
         super.init(nibName: nil, bundle: nil)
@@ -54,11 +71,21 @@ final class ContainerViewController: UIViewController, SideMenuActionDelegate {
         self.configureCenterViewController()
         self.readyDimmedView()
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        guard isMenuExpanded else { return }
+        
+        if interfaceOrientation == .portrait {
+            menuViewController.view.frame.origin.x = centerController.view.frame.width / 4
+        } else {
+            menuViewController.view.frame.origin.x = centerController.view.frame.width / 2 + 60
+        }
+    }
 
     // MARK: - Helpers
     
     private func readyDimmedView() {
-        // homeVC 세팅 후 호출해주어야 함.
+        // CenterVC 세팅 후 호출해주어야 함.
         view.addSubview(dimmedView)
         
         dimmedView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
@@ -82,7 +109,7 @@ final class ContainerViewController: UIViewController, SideMenuActionDelegate {
         // add our menu controller here
         guard menuViewController == nil else { return }
         
-        menuViewController = MenuController()
+        menuViewController = MenuViewController()
         
         view.addSubview(menuViewController.view)
         addChild(menuViewController)
@@ -90,14 +117,18 @@ final class ContainerViewController: UIViewController, SideMenuActionDelegate {
         print("Did add menu Controller")
     }
     
-    private func showMenuController(shouldExpand: Bool) {
-        if shouldExpand {
+    private func showOrHideMenuController(show: Bool) {
+        if show {
             // show menu
             self.menuViewController.view.frame.origin.x = self.centerController.view.frame.width
             UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
-                //self.centerController.view.frame.origin.x = self.centerController.view.frame.width - 80
                 self.dimmedView.isHidden = false
-                self.menuViewController.view.frame.origin.x = self.centerController.view.frame.width / 3
+                
+                if self.interfaceOrientation == .portrait {
+                    self.menuViewController.view.frame.origin.x = self.centerController.view.frame.width / 4
+                } else {
+                    self.menuViewController.view.frame.origin.x = self.centerController.view.frame.width / 2 + 60
+                }
             }, completion: nil)
 
         } else {
@@ -112,10 +143,10 @@ final class ContainerViewController: UIViewController, SideMenuActionDelegate {
     // MARK: - Actions
     
     @objc private func didTapDimmedView() {
-        guard isExpanded else { return }
+        guard isMenuExpanded else { return }
         
-        isExpanded.toggle()
-        showMenuController(shouldExpand: false)
+        isMenuExpanded.toggle()
+        showOrHideMenuController(show: false)
     }
 }
 
@@ -124,11 +155,11 @@ final class ContainerViewController: UIViewController, SideMenuActionDelegate {
 extension ContainerViewController {
     
     func didTapMenuButton() {
-        if !isExpanded {
+        if !isMenuExpanded {
             configureMenuViewController()
         }
         
-        isExpanded.toggle()
-        showMenuController(shouldExpand: isExpanded)
+        isMenuExpanded.toggle()
+        showOrHideMenuController(show: isMenuExpanded)
     }
 }

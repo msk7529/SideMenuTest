@@ -7,8 +7,10 @@
 
 import UIKit
 
-final class MenuController: UIViewController {
+final class MenuViewController: UIViewController {
     // MARK: - Properties
+
+    var isExpanded: Bool = false
     
     // MARK: - Init
 
