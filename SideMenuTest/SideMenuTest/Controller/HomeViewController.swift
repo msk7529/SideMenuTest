@@ -1,5 +1,5 @@
 //
-//  HomeController.swift
+//  HomeViewController.swift
 //  SideMenuTest
 //
 //  Created by kakao on 2021/08/23.
@@ -7,14 +7,11 @@
 
 import UIKit
 
-protocol HomeControllerDelegate: AnyObject {
-    func didTapMenuButton()
-}
+final class HomeViewController: UIViewController, SideMenuSuportable {
 
-final class HomeController: UIViewController {
     // MARK: - Properties
     
-    weak var delegate: HomeControllerDelegate?
+    weak var delegate: SideMenuActionDelegate?
     
     // MARK: - Life Cycles
 
@@ -22,6 +19,7 @@ final class HomeController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        
         configureNavigationBar()
     }
     
@@ -32,7 +30,8 @@ final class HomeController: UIViewController {
         navigationController?.navigationBar.barStyle = .black
         
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationItem.title = "Home ViewController"
+        navigationItem.title = "HomeVC"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "closeIcon")?.withTintColor(.white).withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(didTapCloseButton))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "sideMenuIcon")?.withTintColor(.white).withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(didTapMenuButton))
     }
     
@@ -40,5 +39,9 @@ final class HomeController: UIViewController {
     
     @objc private func didTapMenuButton() {
         delegate?.didTapMenuButton()
+    }
+    
+    @objc private func didTapCloseButton() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ContainerController.swift
+//  ContainerViewController.swift
 //  SideMenuTest
 //
 //  Created by kakao on 2021/08/23.
@@ -7,32 +7,51 @@
 
 import UIKit
 
-final class ContainerController: UIViewController {
+protocol SideMenuActionDelegate: AnyObject {
+    func didTapMenuButton()
+}
+
+protocol SideMenuSuportable: AnyObject {
+    var delegate: SideMenuActionDelegate? { get set }
+}
+
+final class ContainerViewController: UIViewController, SideMenuActionDelegate {
     // MARK: - Properties
     private lazy var dimmedView: UIView = {
         let view: UIView = .init(frame: .zero)
         let tapGesture: UITapGestureRecognizer = .init(target: self, action: #selector(didTapDimmedView))
         view.addGestureRecognizer(tapGesture)
-        view.backgroundColor = .lightGray.withAlphaComponent(0.2)
+        view.backgroundColor = .lightGray.withAlphaComponent(0.4)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isHidden = true
         return view
     }()
     
-    var menuController: UIViewController!
-    var centerController: UIViewController!
-    var isExpanded: Bool = false
+    private var rootViewController: (UIViewController & SideMenuSuportable)?
+    private var menuViewController: UIViewController!
+    private var centerController: UIViewController!
+    private var isExpanded: Bool = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     // MARK: - Init
+    init(rootViewController: UIViewController & SideMenuSuportable) {
+        self.rootViewController = rootViewController
+        super.init(nibName: nil, bundle: nil)
+        
+        self.modalPresentationStyle = .fullScreen
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.configureHomeController()
+        self.configureCenterViewController()
         self.readyDimmedView()
     }
 
@@ -48,43 +67,44 @@ final class ContainerController: UIViewController {
         dimmedView.heightAnchor.constraint(equalTo: self.view.heightAnchor).isActive = true
     }
     
-    private func configureHomeController() {
-        let homeVC = HomeController()
-        homeVC.delegate = self
-        centerController = UINavigationController(rootViewController: homeVC)
+    private func configureCenterViewController() {
+        guard let rootVC = rootViewController else { return }
+        
+        rootVC.delegate = self
+        centerController = UINavigationController(rootViewController: rootVC)
         
         view.addSubview(centerController.view)
         addChild(centerController)
         centerController.didMove(toParent: self)
     }
     
-    private func configureMenuController() {
-        if menuController == nil {
-            // add our menu controller here
-            menuController = MenuController()
-            
-            view.addSubview(menuController.view)
-            addChild(menuController)
-            menuController.didMove(toParent: self)
-            print("Did add menu Controller")
-        }
+    private func configureMenuViewController() {
+        // add our menu controller here
+        guard menuViewController == nil else { return }
+        
+        menuViewController = MenuController()
+        
+        view.addSubview(menuViewController.view)
+        addChild(menuViewController)
+        menuViewController.didMove(toParent: self)
+        print("Did add menu Controller")
     }
     
     private func showMenuController(shouldExpand: Bool) {
         if shouldExpand {
             // show menu
-            self.menuController.view.frame.origin.x = self.centerController.view.frame.width
+            self.menuViewController.view.frame.origin.x = self.centerController.view.frame.width
             UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
                 //self.centerController.view.frame.origin.x = self.centerController.view.frame.width - 80
                 self.dimmedView.isHidden = false
-                self.menuController.view.frame.origin.x = self.centerController.view.frame.width / 3
+                self.menuViewController.view.frame.origin.x = self.centerController.view.frame.width / 3
             }, completion: nil)
 
         } else {
             // hide menu
             UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
                 self.dimmedView.isHidden = true
-                self.menuController.view.frame.origin.x = self.centerController.view.frame.width
+                self.menuViewController.view.frame.origin.x = self.centerController.view.frame.width
             }, completion: nil)
         }
     }
@@ -99,11 +119,13 @@ final class ContainerController: UIViewController {
     }
 }
 
-extension ContainerController: HomeControllerDelegate {
+// MARK: - SideMenuActionDelegate
+
+extension ContainerViewController {
     
     func didTapMenuButton() {
         if !isExpanded {
-            configureMenuController()
+            configureMenuViewController()
         }
         
         isExpanded.toggle()
