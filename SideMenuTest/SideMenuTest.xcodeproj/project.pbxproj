@@ -15,6 +15,8 @@
 		C28B6E9426D3C3A9009D90FD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6E9326D3C3A9009D90FD /* HomeViewController.swift */; };
 		C28B6E9626D3C3B0009D90FD /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6E9526D3C3B0009D90FD /* MenuViewController.swift */; };
 		C28B6E9826D3E9FB009D90FD /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6E9726D3E9FB009D90FD /* FirstViewController.swift */; };
+		C28B6E9D26D49AF4009D90FD /* HomeTopBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6E9C26D49AF4009D90FD /* HomeTopBannerView.swift */; };
+		C28B6E9F26D4E464009D90FD /* HomeTopBannerTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6E9E26D4E464009D90FD /* HomeTopBannerTestViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		C28B6E9326D3C3A9009D90FD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		C28B6E9526D3C3B0009D90FD /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		C28B6E9726D3E9FB009D90FD /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		C28B6E9C26D49AF4009D90FD /* HomeTopBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopBannerView.swift; sourceTree = "<group>"; };
+		C28B6E9E26D4E464009D90FD /* HomeTopBannerTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopBannerTestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				C28B6E9026D3C365009D90FD /* Controller */,
+				C28B6E9B26D49ADD009D90FD /* View */,
 				C28B6E7C26D3C1E0009D90FD /* AppDelegate.swift */,
 				C28B6E7E26D3C1E1009D90FD /* SceneDelegate.swift */,
 				C28B6E8526D3C1E3009D90FD /* Assets.xcassets */,
@@ -77,8 +82,17 @@
 				C28B6E9126D3C37F009D90FD /* ContainerViewController.swift */,
 				C28B6E9326D3C3A9009D90FD /* HomeViewController.swift */,
 				C28B6E9526D3C3B0009D90FD /* MenuViewController.swift */,
+				C28B6E9E26D4E464009D90FD /* HomeTopBannerTestViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		C28B6E9B26D49ADD009D90FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C28B6E9C26D49AF4009D90FD /* HomeTopBannerView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +166,8 @@
 			files = (
 				C28B6E7D26D3C1E0009D90FD /* AppDelegate.swift in Sources */,
 				C28B6E7F26D3C1E1009D90FD /* SceneDelegate.swift in Sources */,
+				C28B6E9F26D4E464009D90FD /* HomeTopBannerTestViewController.swift in Sources */,
+				C28B6E9D26D49AF4009D90FD /* HomeTopBannerView.swift in Sources */,
 				C28B6E9226D3C37F009D90FD /* ContainerViewController.swift in Sources */,
 				C28B6E9826D3E9FB009D90FD /* FirstViewController.swift in Sources */,
 				C28B6E9626D3C3B0009D90FD /* MenuViewController.swift in Sources */,
