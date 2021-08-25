@@ -45,6 +45,9 @@ final class HomeTopBannerTestViewController: UIViewController, Refreshable {
         
         initView()
         setUpViewStyle()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapBannerView))
+        self.view.addGestureRecognizer(tapGesture)
     }
     
     
@@ -102,6 +105,12 @@ final class HomeTopBannerTestViewController: UIViewController, Refreshable {
         view.layer.borderWidth = 0.5
         view.layer.cornerRadius = 5
         view.layer.masksToBounds = false
+    }
+    
+    // MARK: - Actions
+    @objc private func didTapBannerView() {
+        let nextVC = HomeNextViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
     // MARK: - Refreshable

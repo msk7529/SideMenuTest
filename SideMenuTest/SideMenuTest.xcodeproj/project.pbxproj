@@ -17,6 +17,9 @@
 		C28B6E9826D3E9FB009D90FD /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6E9726D3E9FB009D90FD /* FirstViewController.swift */; };
 		C28B6E9D26D49AF4009D90FD /* HomeTopBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6E9C26D49AF4009D90FD /* HomeTopBannerView.swift */; };
 		C28B6E9F26D4E464009D90FD /* HomeTopBannerTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6E9E26D4E464009D90FD /* HomeTopBannerTestViewController.swift */; };
+		C28B6EA126D5E5B5009D90FD /* HomeNextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6EA026D5E5B5009D90FD /* HomeNextViewController.swift */; };
+		C28B6EA426D6021F009D90FD /* SideMenuTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6EA326D6021F009D90FD /* SideMenuTransition.swift */; };
+		C28B6EA626D61CBA009D90FD /* HomeViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6EA526D61CBA009D90FD /* HomeViewController2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		C28B6E9726D3E9FB009D90FD /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		C28B6E9C26D49AF4009D90FD /* HomeTopBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopBannerView.swift; sourceTree = "<group>"; };
 		C28B6E9E26D4E464009D90FD /* HomeTopBannerTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopBannerTestViewController.swift; sourceTree = "<group>"; };
+		C28B6EA026D5E5B5009D90FD /* HomeNextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNextViewController.swift; sourceTree = "<group>"; };
+		C28B6EA326D6021F009D90FD /* SideMenuTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTransition.swift; sourceTree = "<group>"; };
+		C28B6EA526D61CBA009D90FD /* HomeViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +70,7 @@
 		C28B6E7B26D3C1E0009D90FD /* SideMenuTest */ = {
 			isa = PBXGroup;
 			children = (
+				C28B6EA226D60204009D90FD /* Transition */,
 				C28B6E9026D3C365009D90FD /* Controller */,
 				C28B6E9B26D49ADD009D90FD /* View */,
 				C28B6E7C26D3C1E0009D90FD /* AppDelegate.swift */,
@@ -81,8 +88,10 @@
 				C28B6E9726D3E9FB009D90FD /* FirstViewController.swift */,
 				C28B6E9126D3C37F009D90FD /* ContainerViewController.swift */,
 				C28B6E9326D3C3A9009D90FD /* HomeViewController.swift */,
+				C28B6EA526D61CBA009D90FD /* HomeViewController2.swift */,
 				C28B6E9526D3C3B0009D90FD /* MenuViewController.swift */,
 				C28B6E9E26D4E464009D90FD /* HomeTopBannerTestViewController.swift */,
+				C28B6EA026D5E5B5009D90FD /* HomeNextViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -93,6 +102,14 @@
 				C28B6E9C26D49AF4009D90FD /* HomeTopBannerView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C28B6EA226D60204009D90FD /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				C28B6EA326D6021F009D90FD /* SideMenuTransition.swift */,
+			);
+			path = Transition;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,10 +185,13 @@
 				C28B6E7F26D3C1E1009D90FD /* SceneDelegate.swift in Sources */,
 				C28B6E9F26D4E464009D90FD /* HomeTopBannerTestViewController.swift in Sources */,
 				C28B6E9D26D49AF4009D90FD /* HomeTopBannerView.swift in Sources */,
+				C28B6EA426D6021F009D90FD /* SideMenuTransition.swift in Sources */,
 				C28B6E9226D3C37F009D90FD /* ContainerViewController.swift in Sources */,
+				C28B6EA126D5E5B5009D90FD /* HomeNextViewController.swift in Sources */,
 				C28B6E9826D3E9FB009D90FD /* FirstViewController.swift in Sources */,
 				C28B6E9626D3C3B0009D90FD /* MenuViewController.swift in Sources */,
 				C28B6E9426D3C3A9009D90FD /* HomeViewController.swift in Sources */,
+				C28B6EA626D61CBA009D90FD /* HomeViewController2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
