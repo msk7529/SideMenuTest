@@ -33,6 +33,7 @@ final class HomeViewController2: UIViewController {
     }()
     
     private let bannerTestVC: HomeTopBannerTestViewController = .init()
+    private let verticalVC: HomeVerticalViewController = .init()
     
     private lazy var sideMenuTransitionDelegate: SideMenuTransitionDelegate = {
         return .init()
@@ -88,6 +89,12 @@ final class HomeViewController2: UIViewController {
         self.addChild(bannerTestVC)
         mainStackView.addArrangedSubview(bannerTestVC.view) // VC로 하면 높이를 지정하지 않아도 됨. 그러나 VC에서 스택뷰를 구성해야함
         bannerTestVC.didMove(toParent: self)
+        
+        mainStackView.setCustomSpacing(50, after: bannerTestVC.view)
+        
+        self.addChild(verticalVC)
+        mainStackView.addArrangedSubview(verticalVC.view)
+        verticalVC.didMove(toParent: self)
     }
     
     // MARK: - Actions
