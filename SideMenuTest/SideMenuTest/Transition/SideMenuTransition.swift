@@ -6,7 +6,11 @@
 import UIKit
 
 
-class SideMenuTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
+protocol SideMenuTranstionSuportable: AnyObject {
+    var transitionDelegate: SideMenuTransitionDelegate { get set }
+}
+
+final class SideMenuTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return SideMenuPresentationController(presentedViewController: presented, presenting: presenting)
     }
@@ -20,25 +24,30 @@ class SideMenuTransitionDelegate: NSObject, UIViewControllerTransitioningDelegat
     }
 }
 
-class SideMenuPresentationController: UIPresentationController {
+final class SideMenuPresentationController: UIPresentationController {
     private let dimmedView: UIView = {
-        let view: UIView = .init()
+        let view: UIView = .init(frame: .zero)
         view.backgroundColor = .lightGray.withAlphaComponent(0.4)
         view.alpha = 0
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
+    private var interfaceOrientation: UIInterfaceOrientation {
+        get {
+            guard let interfaceOrientation = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.windowScene?.interfaceOrientation else {
+                return .portrait
+            }
+            return interfaceOrientation
+        }
+    }
+        
     override var frameOfPresentedViewInContainerView: CGRect {
         guard let containerView = containerView else { return .zero }
         
         var frame: CGRect = .zero
         frame.size = size(forChildContentContainer: presentedViewController, withParentContainerSize: containerView.bounds.size)
-        if UIApplication.shared.statusBarOrientation != .portrait {
-            frame.origin.x = 40
-        }
         frame.origin.x = containerView.frame.width - frame.size.width
-        //frame.origin.y = containerView.frame.height - frame.size.height
         return frame
     }
         
@@ -86,10 +95,10 @@ class SideMenuPresentationController: UIPresentationController {
     
     
     override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
-        if UIApplication.shared.statusBarOrientation == .portrait {
+        if interfaceOrientation == .portrait {
             return CGSize(width: parentSize.width / 4 * 3, height: parentSize.height)
         } else {
-            return CGSize(width: parentSize.width - 80, height: 250)
+            return CGSize(width: parentSize.width / 2 + 60, height: parentSize.height)
         }
     }
     
@@ -98,7 +107,7 @@ class SideMenuPresentationController: UIPresentationController {
     }
 }
 
-class SideMenuTransitionAnimator: NSObject {
+final class SideMenuTransitionAnimator: NSObject {
     var isPresent: Bool
     
     init(isPresent: Bool) {

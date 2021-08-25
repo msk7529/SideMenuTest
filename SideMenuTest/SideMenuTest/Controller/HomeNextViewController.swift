@@ -7,11 +7,9 @@
 
 import UIKit
 
-final class HomeNextViewController: UIViewController {
+final class HomeNextViewController: UIViewController, SideMenuTranstionSuportable {
         
-    private lazy var sideMenuTransitionDelegate: SideMenuTransitionDelegate = {
-        return .init()
-    }()
+    internal lazy var transitionDelegate: SideMenuTransitionDelegate = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +36,7 @@ final class HomeNextViewController: UIViewController {
     
     @objc private func didTapMenuButton() {
         let sideMenu: MenuViewController = .init()
-        sideMenu.transitioningDelegate = self.sideMenuTransitionDelegate
+        sideMenu.transitioningDelegate = self.transitionDelegate
         //sideMenu.delegate = self
         sideMenu.modalPresentationStyle = .custom
         present(sideMenu, animated: true, completion: nil)
