@@ -18,6 +18,7 @@ final class HomeNextViewController: UIViewController, SideMenuTranstionSuportabl
         customSwitch.titleFont = UIFont(name: "HelveticaNeue-Medium", size: 13.0)
         customSwitch.layer.borderWidth = 0.3
         customSwitch.layer.borderColor = UIColor.darkGray.cgColor
+        customSwitch.layer.masksToBounds = true
         customSwitch.addTarget(self, action: #selector(didTapSwitch), for: .valueChanged)
         customSwitch.translatesAutoresizingMaskIntoConstraints = false
         return customSwitch

@@ -40,6 +40,7 @@ final class HomeVerticalViewController: UIViewController, Refreshable {
         customSwitch.titleFont = UIFont(name: "HelveticaNeue-Medium", size: 13.0)
         customSwitch.layer.borderWidth = 0.3
         customSwitch.layer.borderColor = UIColor.darkGray.cgColor
+        customSwitch.layer.masksToBounds = true
         customSwitch.addTarget(self, action: #selector(didTapSwitch), for: .valueChanged)
         customSwitch.translatesAutoresizingMaskIntoConstraints = false
         return customSwitch
@@ -57,6 +58,10 @@ final class HomeVerticalViewController: UIViewController, Refreshable {
         button.semanticContentAttribute = .forceRightToLeft
         button.imageEdgeInsets = .init(top: 0, left: 5, bottom: 0, right: 0)
         button.adjustsImageWhenHighlighted = false
+        button.layer.cornerRadius = 35 / 2
+        button.layer.borderWidth = 0.3
+        button.layer.borderColor = UIColor.darkGray.cgColor
+        button.layer.masksToBounds = true
         button.addTarget(self, action: #selector(didTapImportantButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -65,15 +70,11 @@ final class HomeVerticalViewController: UIViewController, Refreshable {
         
     // MARK: - Life Cycles
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         self.view.backgroundColor = .systemTeal
         
         initView()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        importantButton.layer.borderWidth = 0.3
-        importantButton.layer.borderColor = UIColor.darkGray.cgColor
-        importantButton.layer.cornerRadius = self.view.bounds.height / 2
     }
     
     // MARK: - Helpers

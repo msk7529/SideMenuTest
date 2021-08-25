@@ -41,6 +41,8 @@ final class HomeTopBannerTestViewController: UIViewController, Refreshable {
         
     // MARK: - Life Cycles
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         self.view.backgroundColor = .systemGreen
         
         initView()
@@ -50,8 +52,9 @@ final class HomeTopBannerTestViewController: UIViewController, Refreshable {
         self.view.addGestureRecognizer(tapGesture)
     }
     
-    
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         setUpViewStyle()
     }
     

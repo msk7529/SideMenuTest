@@ -9,24 +9,7 @@ import UIKit
 
 final class HomeCustomSwitch: UIControl {
     
-    final class HomeCustomSwitchRoundedLayer: CALayer {
-        override var bounds: CGRect {
-            didSet {
-                cornerRadius = bounds.height / 2.0
-            }
-        }
-    }
-    
-    final class SelectedBackgroundView: UIView {
-        override class var layerClass: AnyClass {
-            return HomeCustomSwitchRoundedLayer.self
-        }
-    }
-        
     // MARK: - Properties
-    override internal class var layerClass : AnyClass {
-        return HomeCustomSwitchRoundedLayer.self
-    }
     
     var titles: [String] {
         set {
@@ -94,7 +77,7 @@ final class HomeCustomSwitch: UIControl {
     private let selectedTitleLabelsContentView: UIView = .init(frame: .zero)
     private var selectedTitleLabels: [UILabel] = []
     
-    @objc private dynamic var selectedBackgroundView: SelectedBackgroundView = .init(frame: .zero)
+    @objc private dynamic var selectedBackgroundView: UIView = .init(frame: .zero)
     
     private let titleMaskView: UIView = UIView()
     
@@ -123,7 +106,7 @@ final class HomeCustomSwitch: UIControl {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+                
         initView()
         addGesture()
         addObserver()
@@ -136,8 +119,11 @@ final class HomeCustomSwitch: UIControl {
     override internal func layoutSubviews() {
         super.layoutSubviews()
         
+        self.layer.cornerRadius = bounds.height / 2
+        
         let selectedBackgroundWidth = bounds.width / CGFloat(titleLabels.count)
         selectedBackgroundView.frame = CGRect(x: CGFloat(selectedIndex) * selectedBackgroundWidth, y: 0, width: selectedBackgroundWidth, height: bounds.height)
+        selectedBackgroundView.layer.cornerRadius = bounds.height / 2
         
         titleLabelsContentView.frame = bounds
         selectedTitleLabelsContentView.frame = bounds
@@ -166,13 +152,10 @@ final class HomeCustomSwitch: UIControl {
         addSubview(selectedBackgroundView)
         addSubview(selectedTitleLabelsContentView)
         
-        backgroundColor = .white
         titleMaskView.backgroundColor = .black
-        selectedTitleLabelsContentView.layer.mask = titleMaskView.layer
         
-        selectedBackgroundColor = .white
-        titleColor = .white
-        selectedTitleColor = .black
+        selectedTitleLabelsContentView.layer.frame = titleMaskView.frame
+        selectedTitleLabelsContentView.layer.mask = titleMaskView.layer
     }
     
     private func addGesture() {
