@@ -20,6 +20,7 @@
 		C28B6EA126D5E5B5009D90FD /* HomeNextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6EA026D5E5B5009D90FD /* HomeNextViewController.swift */; };
 		C28B6EA426D6021F009D90FD /* SideMenuTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6EA326D6021F009D90FD /* SideMenuTransition.swift */; };
 		C28B6EA626D61CBA009D90FD /* HomeViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6EA526D61CBA009D90FD /* HomeViewController2.swift */; };
+		C28B6EA826D682DD009D90FD /* HomeCustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6EA726D682DD009D90FD /* HomeCustomSwitch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		C28B6EA026D5E5B5009D90FD /* HomeNextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNextViewController.swift; sourceTree = "<group>"; };
 		C28B6EA326D6021F009D90FD /* SideMenuTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTransition.swift; sourceTree = "<group>"; };
 		C28B6EA526D61CBA009D90FD /* HomeViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController2.swift; sourceTree = "<group>"; };
+		C28B6EA726D682DD009D90FD /* HomeCustomSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCustomSwitch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				C28B6E9C26D49AF4009D90FD /* HomeTopBannerView.swift */,
+				C28B6EA726D682DD009D90FD /* HomeCustomSwitch.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				C28B6EA426D6021F009D90FD /* SideMenuTransition.swift in Sources */,
 				C28B6E9226D3C37F009D90FD /* ContainerViewController.swift in Sources */,
 				C28B6EA126D5E5B5009D90FD /* HomeNextViewController.swift in Sources */,
+				C28B6EA826D682DD009D90FD /* HomeCustomSwitch.swift in Sources */,
 				C28B6E9826D3E9FB009D90FD /* FirstViewController.swift in Sources */,
 				C28B6E9626D3C3B0009D90FD /* MenuViewController.swift in Sources */,
 				C28B6E9426D3C3A9009D90FD /* HomeViewController.swift in Sources */,
