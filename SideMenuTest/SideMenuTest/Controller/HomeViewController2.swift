@@ -10,6 +10,21 @@ import UIKit
 final class HomeViewController2: UIViewController, UIScrollViewDelegate {
 
     // MARK: - Properties
+    private let bgStackView: UIStackView = {
+        let stackView: UIStackView = .init(frame: .zero)
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let bgView: UIView = {
+        let view: UIView = .init(frame: .zero)
+        view.backgroundColor = .lightGray
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView: UIScrollView = .init(frame: .zero)
         scrollView.delegate = self
@@ -24,7 +39,7 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
     
     private let containerView: UIView = {
         let view: UIView = .init(frame: .zero)
-        view.backgroundColor = .clear
+        view.backgroundColor = .systemBackground
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -36,6 +51,21 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
         //stackView.backgroundColor = .systemOrange
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
+    }()
+    
+    private let footerStackView: UIStackView = {
+        let stackView: UIStackView = .init(frame: .zero)
+        stackView.axis = .vertical
+        stackView.spacing = 0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let footerView: UIView = {
+        let view: UIView = .init()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemRed
+        return view
     }()
     
     private lazy var topBannerView: HomeTopBannerView = {
@@ -81,9 +111,20 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
         configureBasicUI()
         addBannerView()
         addVerticalView()
+        addFooterView()
     }
     
     private func configureBasicUI() {
+        view.addSubview(bgStackView)
+        
+        bgStackView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        bgStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        bgStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        bgStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        bgStackView.addArrangedSubview(UIView())
+        bgStackView.addArrangedSubview(bgView)
+        
         view.addSubview(scrollView)
         
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -123,8 +164,22 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
         self.addChild(verticalVC)
         mainStackView.addArrangedSubview(verticalVC.view)
         verticalVC.didMove(toParent: self)
+    }
+    
+    private func addFooterView() {
+        containerView.addSubview(footerStackView)
         
-        verticalVC.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -30).isActive = true     // 컨테이너뷰에 들어가는 마지막 요소에서는 이렇게 bottomAnchor를 컨테이너뷰에 맞춰줘야 스크롤뷰가 스크롤영역을 제대로 인식하고 UI가 안깨질수 있다.
+        footerStackView.topAnchor.constraint(equalTo: mainStackView.bottomAnchor, constant: 50).isActive = true
+        footerStackView.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        footerStackView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        
+        footerStackView.addArrangedSubview(footerView)
+        
+        footerView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        footerStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        // 컨테이너뷰에 들어가는 마지막 요소에서는 이렇게 bottomAnchor를 컨테이너뷰에 맞춰줘야 스크롤뷰가 스크롤영역을 제대로 인식하고 UI가 안깨질수 있다.
+        // containerView의 safeArea에 맞출지는 UI보고 판단.
     }
     
     // MARK: - Actions
@@ -144,5 +199,13 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
     @objc private func didTapRefreshButton() {
         self.children.compactMap { $0 as? Refreshable }.forEach { $0.refreshItem() }
         self.mainStackView.arrangedSubviews.compactMap { $0 as? Refreshable }.forEach { $0.refreshItem() }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.bannerTestVC.view.isHidden = true
+        } completion: { _ in
+            self.mainStackView.removeArrangedSubview(self.bannerTestVC.view)
+            self.bannerTestVC.view.removeFromSuperview()
+        }
+
     }
 }

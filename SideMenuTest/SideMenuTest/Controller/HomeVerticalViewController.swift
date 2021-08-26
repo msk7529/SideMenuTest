@@ -113,7 +113,7 @@ final class HomeVerticalViewController: UIViewController, Refreshable {
     }
     
     private func configureSecondTapStackView() {
-        for i in 0..<5 {
+        for i in 0..<10 {
             let item: HomeSecondTapVerticalItem = .init(frame: .zero)
             item.subjectText = "\(i)번째"
             secondTapStackView.addArrangedSubview(item)
