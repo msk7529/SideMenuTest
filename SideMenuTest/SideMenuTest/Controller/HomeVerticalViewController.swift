@@ -31,6 +31,16 @@ final class HomeVerticalViewController: UIViewController, Refreshable {
         return stackView
     }()
     
+    private let secondTapStackView: UIStackView = {
+        let stackView: UIStackView = .init(frame: .zero)
+        stackView.axis = .vertical
+        stackView.spacing = 15
+        stackView.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private lazy var customSwitch: HomeCustomSwitch = {
         let customSwitch: HomeCustomSwitch = .init(titles: ["도레미파", "솔라시도"])
         customSwitch.backgroundColor = .white
@@ -50,7 +60,6 @@ final class HomeVerticalViewController: UIViewController, Refreshable {
         let button: UIButton = .init(type: .custom)
         button.setTitle(" 중요", for: .normal)
         button.setImage(UIImage(named: "importantIcon"), for: .normal)
-        button.setImage(UIImage(named: "importantIcon"), for: .selected)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .systemBackground
         button.imageView?.contentMode = .scaleAspectFit
@@ -94,6 +103,21 @@ final class HomeVerticalViewController: UIViewController, Refreshable {
         customSwitch.widthAnchor.constraint(equalToConstant: 160).isActive = true
         customSwitch.heightAnchor.constraint(equalToConstant: 35).isActive = true
         importantButton.widthAnchor.constraint(equalToConstant: 90).isActive = true
+        
+        mainStackView.setCustomSpacing(50, after: hStackView)
+        mainStackView.addArrangedSubview(secondTapStackView)
+        
+        configureSecondTapStackView()
+        
+        secondTapStackView.isHidden = true
+    }
+    
+    private func configureSecondTapStackView() {
+        for i in 0..<5 {
+            let item: HomeSecondTapVerticalItem = .init(frame: .zero)
+            item.subjectText = "\(i)번째"
+            secondTapStackView.addArrangedSubview(item)
+        }
     }
 
     // MARK: - Refreshable
@@ -103,6 +127,13 @@ final class HomeVerticalViewController: UIViewController, Refreshable {
     
     // MARK: - Actions
     @objc private func didTapSwitch() {
+        if customSwitch.selectedIndex == 0 {
+            secondTapStackView.isHidden = true
+        } else {
+            UIView.animate(withDuration: 0.1) {
+                self.secondTapStackView.isHidden = false
+            }
+        }
         print("switch value changed!")
     }
     
