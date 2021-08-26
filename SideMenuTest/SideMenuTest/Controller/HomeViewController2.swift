@@ -7,9 +7,21 @@
 
 import UIKit
 
-final class HomeViewController2: UIViewController {
+final class HomeViewController2: UIViewController, UIScrollViewDelegate {
 
     // MARK: - Properties
+    private lazy var scrollView: UIScrollView = {
+        let scrollView: UIScrollView = .init(frame: .zero)
+        scrollView.delegate = self
+        scrollView.backgroundColor = .clear
+        //scrollView.contentInsetAdjustmentBehavior = .never    // 이거 설정하니까 상단바운스가 안되네 ..
+        scrollView.isScrollEnabled = true
+        scrollView.bounces = true
+        scrollView.alwaysBounceVertical = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
     private let containerView: UIView = {
         let view: UIView = .init(frame: .zero)
         view.backgroundColor = .clear
@@ -66,22 +78,36 @@ final class HomeViewController2: UIViewController {
     }
     
     private func initView() {
+        configureBasicUI()
         addBannerView()
+        addVerticalView()
+    }
+    
+    private func configureBasicUI() {
+        view.addSubview(scrollView)
+        
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        scrollView.addSubview(containerView)
+        // 스크롤영역을 설정해주기 위해 보통 이런식으로 뷰를 하나 넣고 아래와 같이 오토레이아웃을 설정해준다. 주의할 점이 contentLayoutGuide, frameLayoutGuide을 이용해야 한다는거...
+        
+        containerView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor).isActive = true
+        containerView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor).isActive = true
+        
+        containerView.addSubview(mainStackView)
+        
+        mainStackView.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor, constant: 6).isActive = true
+        mainStackView.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        mainStackView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
     }
     
     private func addBannerView() {
-        view.addSubview(containerView)
-        containerView.addSubview(mainStackView)
-        
-        containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 6).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
-        mainStackView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        mainStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        mainStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        
         topBannerView.heightAnchor.constraint(equalToConstant: 50).isActive = true  // 반드시 높이를 지정해주어야 정상동작
         
         mainStackView.addArrangedSubview(topBannerView)
@@ -91,10 +117,14 @@ final class HomeViewController2: UIViewController {
         bannerTestVC.didMove(toParent: self)
         
         mainStackView.setCustomSpacing(50, after: bannerTestVC.view)
-        
+    }
+    
+    private func addVerticalView() {
         self.addChild(verticalVC)
         mainStackView.addArrangedSubview(verticalVC.view)
         verticalVC.didMove(toParent: self)
+        
+        verticalVC.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -30).isActive = true     // 컨테이너뷰에 들어가는 마지막 요소에서는 이렇게 bottomAnchor를 컨테이너뷰에 맞춰줘야 스크롤뷰가 스크롤영역을 제대로 인식하고 UI가 안깨질수 있다.
     }
     
     // MARK: - Actions
