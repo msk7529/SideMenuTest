@@ -16,7 +16,7 @@ final class HomeCustomSwitch: UIControl {
             (titleLabels + selectedTitleLabels).forEach { $0.removeFromSuperview() }
             
             titleLabels = newValue.map { title in
-                let label = UILabel()
+                let label: UILabel = .init(frame: .zero)
                 label.text = title
                 label.textColor = titleColor
                 label.font = titleFont
@@ -27,7 +27,7 @@ final class HomeCustomSwitch: UIControl {
             }
             
             selectedTitleLabels = newValue.map { title in
-                let label = UILabel()
+                let label: UILabel = .init(frame: .zero)
                 label.text = title
                 label.textColor = selectedTitleColor
                 label.font = titleFont
@@ -38,7 +38,7 @@ final class HomeCustomSwitch: UIControl {
             }
         }
         get {
-            return titleLabels.map { $0.text! }
+            return titleLabels.map { $0.text ?? "" }
         }
     }
     
@@ -86,18 +86,13 @@ final class HomeCustomSwitch: UIControl {
     
     private var initialSelectedBackgroundViewFrame: CGRect?
     
-    // MARK: - Animation
-    
-    private let animationDuration: TimeInterval = 0.3
-    private let animationSpringDamping: CGFloat = 0.75
-    private let animationInitialSpringVelocity: CGFloat = 0.0
-    
     // MARK: - Init
     
     init(titles: [String]) {
-        super.init(frame: CGRect.zero)
+        super.init(frame: .zero)
         
         self.titles = titles
+        
         initView()
         addGesture()
         addObserver()
@@ -131,19 +126,17 @@ final class HomeCustomSwitch: UIControl {
         let titleLabelMaxWidth = selectedBackgroundWidth
         let titleLabelMaxHeight = bounds.height
         
-        zip(titleLabels, selectedTitleLabels).forEach { label, selectedLabel in
-            if let index = titleLabels.firstIndex(of: label) {
-                var size = label.sizeThatFits(CGSize(width: titleLabelMaxWidth, height: titleLabelMaxHeight))
-                size.width = min(size.width, titleLabelMaxWidth)
-              
-                let x = floor((bounds.width / CGFloat(titleLabels.count)) * CGFloat(index) + (bounds.width / CGFloat(titleLabels.count) - size.width) / 2.0)
-                let y = floor((bounds.height - size.height) / 2.0)
-                let origin = CGPoint(x: x, y: y)
-                
-                let frame = CGRect(origin: origin, size: size)
-                label.frame = frame
-                selectedLabel.frame = frame
-            }
+        for index in 0..<titleLabels.count {
+            var size = titleLabels[index].sizeThatFits(CGSize(width: titleLabelMaxWidth, height: titleLabelMaxHeight))
+            size.width = min(size.width, titleLabelMaxWidth)
+          
+            let xxx = floor((bounds.width / CGFloat(titleLabels.count)) * CGFloat(index) + (bounds.width / CGFloat(titleLabels.count) - size.width) / 2.0)
+            let yyy = floor((bounds.height - size.height) / 2.0)
+            let origin = CGPoint(x: xxx, y: yyy)
+            
+            let frame = CGRect(origin: origin, size: size)
+            titleLabels[index].frame = frame
+            selectedTitleLabels[index].frame = frame
         }
     }
     
@@ -186,7 +179,7 @@ final class HomeCustomSwitch: UIControl {
     
     // MARK: - Helpers
     
-    @objc func didTapSwitch(_ gesture: UITapGestureRecognizer!) {
+    @objc func didTapSwitch(_ gesture: UITapGestureRecognizer) {
         guard !titleLabels.isEmpty else { return }
         
         let location = gesture.location(in: self)
@@ -195,7 +188,7 @@ final class HomeCustomSwitch: UIControl {
         setSelectedIndex(index)
     }
     
-    @objc func didPanSwitch(_ gesture: UIPanGestureRecognizer!) {
+    @objc func didPanSwitch(_ gesture: UIPanGestureRecognizer) {
         guard !titleLabels.isEmpty else { return }
 
         if gesture.state == .began {
@@ -226,7 +219,7 @@ final class HomeCustomSwitch: UIControl {
             self.sendActions(for: .valueChanged)
         }
         
-        UIView.animate(withDuration: animationDuration, delay: 0.0, usingSpringWithDamping: animationSpringDamping, initialSpringVelocity: animationInitialSpringVelocity, options: [.beginFromCurrentState,  .curveEaseOut]) {
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [.beginFromCurrentState,  .curveEaseOut]) {
             self.layoutSubviews()
         }
     }
