@@ -2,7 +2,7 @@
 //  HomeSecondTapVerticalItem.swift
 //  SideMenuTest
 //
-//  Created by kakao on 2021/08/26.
+//  Created by Minseop on 2021/08/26.
 //
 
 import UIKit

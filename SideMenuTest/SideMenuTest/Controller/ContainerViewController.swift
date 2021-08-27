@@ -2,7 +2,7 @@
 //  ContainerViewController.swift
 //  SideMenuTest
 //
-//  Created by kakao on 2021/08/23.
+//  Created by Minseop on 2021/08/23.
 //
 
 import UIKit
@@ -28,7 +28,7 @@ final class ContainerViewController: UIViewController, SideMenuActionDelegate {
     }()
     
     private var rootViewController: (UIViewController & SideMenuSuportable)?
-    private var menuViewController: MenuViewController!
+    private var menuViewController: SideMenuViewController!
     private var centerController: UIViewController!
     
     private var isMenuExpanded: Bool {
@@ -109,7 +109,7 @@ final class ContainerViewController: UIViewController, SideMenuActionDelegate {
         // add our menu controller here
         guard menuViewController == nil else { return }
         
-        menuViewController = MenuViewController()
+        menuViewController = SideMenuViewController()
         
         view.addSubview(menuViewController.view)
         addChild(menuViewController)

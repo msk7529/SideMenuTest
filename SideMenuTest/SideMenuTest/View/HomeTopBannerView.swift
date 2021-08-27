@@ -2,7 +2,7 @@
 //  HomeTopBannerView.swift
 //  SideMenuTest
 //
-//  Created by kakao on 2021/08/24.
+//  Created by Minseop on 2021/08/24.
 //
 
 import UIKit

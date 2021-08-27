@@ -2,7 +2,7 @@
 //  HomeViewController.swift
 //  SideMenuTest
 //
-//  Created by kakao on 2021/08/23.
+//  Created by Minseop on 2021/08/23.
 //
 
 import UIKit

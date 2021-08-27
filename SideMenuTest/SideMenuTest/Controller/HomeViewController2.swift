@@ -2,7 +2,7 @@
 //  HomeViewController2.swift
 //  SideMenuTest
 //
-//  Created by kakao on 2021/08/25.
+//  Created by Minseop on 2021/08/25.
 //
 
 import UIKit
@@ -75,7 +75,7 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
     }()
     
     private let bannerTestVC: HomeTopBannerTestViewController = .init()
-    private let verticalVC: HomeVerticalViewController = .init()
+    private let verticalVC: HomeSecondTapVerticalViewController = .init()
     
     private lazy var sideMenuTransitionDelegate: SideMenuTransitionDelegate = {
         return .init()
@@ -185,7 +185,7 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
     // MARK: - Actions
     
     @objc private func didTapMenuButton() {
-        let sideMenu: MenuViewController = .init()
+        let sideMenu: SideMenuViewController = .init()
         sideMenu.transitioningDelegate = self.sideMenuTransitionDelegate
         //sideMenu.delegate = self
         sideMenu.modalPresentationStyle = .custom

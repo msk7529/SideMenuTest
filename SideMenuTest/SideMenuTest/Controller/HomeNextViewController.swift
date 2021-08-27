@@ -56,7 +56,7 @@ final class HomeNextViewController: UIViewController, SideMenuTranstionSuportabl
     }
     
     @objc private func didTapMenuButton() {
-        let sideMenu: MenuViewController = .init()
+        let sideMenu: SideMenuViewController = .init()
         sideMenu.transitioningDelegate = self.transitionDelegate
         //sideMenu.delegate = self
         sideMenu.modalPresentationStyle = .custom
