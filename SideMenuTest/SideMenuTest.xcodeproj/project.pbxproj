@@ -23,6 +23,7 @@
 		C28B6EA826D682DD009D90FD /* HomeCustomSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6EA726D682DD009D90FD /* HomeCustomSwitch.swift */; };
 		C28B6EAA26D6B242009D90FD /* HomeSecondTapVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6EA926D6B242009D90FD /* HomeSecondTapVerticalViewController.swift */; };
 		C28B6EAE26D74B93009D90FD /* HomeSecondTapVerticalItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6EAD26D74B93009D90FD /* HomeSecondTapVerticalItem.swift */; };
+		C28B6F2526D93D24009D90FD /* SideMenuTopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6F2426D93D24009D90FD /* SideMenuTopViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		C28B6EA726D682DD009D90FD /* HomeCustomSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCustomSwitch.swift; sourceTree = "<group>"; };
 		C28B6EA926D6B242009D90FD /* HomeSecondTapVerticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSecondTapVerticalViewController.swift; sourceTree = "<group>"; };
 		C28B6EAD26D74B93009D90FD /* HomeSecondTapVerticalItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSecondTapVerticalItem.swift; sourceTree = "<group>"; };
+		C28B6F2426D93D24009D90FD /* SideMenuTopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTopViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +78,6 @@
 		C28B6E7B26D3C1E0009D90FD /* SideMenuTest */ = {
 			isa = PBXGroup;
 			children = (
-				C28B6EA226D60204009D90FD /* Transition */,
 				C28B6E9026D3C365009D90FD /* Controller */,
 				C28B6E9B26D49ADD009D90FD /* View */,
 				C28B6E7C26D3C1E0009D90FD /* AppDelegate.swift */,
@@ -91,11 +92,11 @@
 		C28B6E9026D3C365009D90FD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C28B6F2326D93CC9009D90FD /* SideMenu */,
 				C28B6E9726D3E9FB009D90FD /* FirstViewController.swift */,
 				C28B6E9126D3C37F009D90FD /* ContainerViewController.swift */,
 				C28B6E9326D3C3A9009D90FD /* HomeViewController.swift */,
 				C28B6EA526D61CBA009D90FD /* HomeViewController2.swift */,
-				C28B6E9526D3C3B0009D90FD /* SideMenuViewController.swift */,
 				C28B6E9E26D4E464009D90FD /* HomeTopBannerTestViewController.swift */,
 				C28B6EA926D6B242009D90FD /* HomeSecondTapVerticalViewController.swift */,
 				C28B6EA026D5E5B5009D90FD /* HomeNextViewController.swift */,
@@ -119,6 +120,16 @@
 				C28B6EA326D6021F009D90FD /* SideMenuTransition.swift */,
 			);
 			path = Transition;
+			sourceTree = "<group>";
+		};
+		C28B6F2326D93CC9009D90FD /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				C28B6EA226D60204009D90FD /* Transition */,
+				C28B6E9526D3C3B0009D90FD /* SideMenuViewController.swift */,
+				C28B6F2426D93D24009D90FD /* SideMenuTopViewController.swift */,
+			);
+			path = SideMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C28B6E7D26D3C1E0009D90FD /* AppDelegate.swift in Sources */,
+				C28B6F2526D93D24009D90FD /* SideMenuTopViewController.swift in Sources */,
 				C28B6E7F26D3C1E1009D90FD /* SceneDelegate.swift in Sources */,
 				C28B6E9F26D4E464009D90FD /* HomeTopBannerTestViewController.swift in Sources */,
 				C28B6E9D26D49AF4009D90FD /* HomeTopBannerView.swift in Sources */,
