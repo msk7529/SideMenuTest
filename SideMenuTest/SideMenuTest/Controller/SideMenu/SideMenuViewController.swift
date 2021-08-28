@@ -53,6 +53,197 @@ final class SideMenuViewController: UIViewController {
         return label
     }()
     
+    private let secondSectionContainerStackView: UIStackView = {
+        let stackView: UIStackView = .init(frame: .zero)
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = .init(top: 0, left: 20, bottom: 0, right: 0)
+        stackView.backgroundColor = .clear
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private let secondSectionTitleLabel: UILabel = {
+        let label: UILabel = .init(frame: .zero)
+        label.text = "두번째 섹션"
+        label.font = .systemFont(ofSize: 15)
+        label.textColor = .lightGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let secondSectionLabelsContainerStackView: UIStackView = {
+        let stackView: UIStackView = .init(frame: .zero)
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = .init(top: 0, left: 10, bottom: 0, right: 10)
+        stackView.backgroundColor = .clear
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var importantStackView: UIStackView = {
+        let stackView: UIStackView = .init(frame: .zero)
+        stackView.axis = .horizontal
+        stackView.spacing = 5
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.backgroundColor = .clear
+        stackView.isUserInteractionEnabled = true
+        stackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapImportantStackView)))
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let label: UILabel = .init(frame: .zero)
+        label.text = "중요"
+        label.font = .systemFont(ofSize: 20)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        let view: UIView = .init(frame: .zero)  // label 높이를 기준으로 가운데 정렬하기 위해 이미지뷰를 한 번 감싸는 용도. 중요
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        let imageView: UIImageView = .init(frame: .zero)
+        imageView.image = UIImage(named: "importantIcon")
+        imageView.backgroundColor = .clear
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        imageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        view.addSubview(imageView)
+        view.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
+        view.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
+        view.widthAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
+        
+        stackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(view)
+        stackView.addArrangedSubview(UIView())
+        
+        return stackView
+    }()
+    
+    private lazy var naverLabel: UILabel = {
+        let label: UILabel = .init(frame: .zero)
+        label.text = "네이버"
+        label.font = .systemFont(ofSize: 20)
+        label.textColor = .black
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapNaverLabel)))
+        label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var kakaoStackView: UIStackView = {
+        let stackView: UIStackView = .init(frame: .zero)
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.backgroundColor = .clear
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let hStackView: UIStackView = .init(frame: .zero)
+        hStackView.axis = .horizontal
+        hStackView.backgroundColor = .clear
+        hStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let label: UILabel = .init(frame: .zero)
+        label.text = "카카오"
+        label.font = .systemFont(ofSize: 20)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        let view: UIView = .init(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(foldButton)
+        view.centerYAnchor.constraint(equalTo: foldButton.centerYAnchor).isActive = true
+        view.centerXAnchor.constraint(equalTo: foldButton.centerXAnchor).isActive = true
+        view.widthAnchor.constraint(equalTo: foldButton.widthAnchor).isActive = true
+        
+        stackView.addArrangedSubview(hStackView)
+        hStackView.addArrangedSubview(label)
+        hStackView.addArrangedSubview(view)
+                
+        return stackView
+    }()
+    
+    private lazy var foldButton: UIButton = {
+        let button: UIButton = .init(frame: .zero)
+        button.setImage(UIImage(named: "downArrowIcon"), for: .normal)
+        button.backgroundColor = .clear
+        button.addTarget(self, action: #selector(didTapFoldButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        return button
+    }()
+    
+    private let kakaoItemStackView: UIStackView = {
+        let stackView: UIStackView = .init(frame: .zero)
+        stackView.axis = .vertical
+        stackView.spacing = 3
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = .init(top: 0, left: 20, bottom: 0, right: 0)
+        stackView.backgroundColor = .clear
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var firstItemLabel: UILabel = {
+        let label: UILabel = .init(frame: .zero)
+        label.text = "가나다"
+        label.font = .systemFont(ofSize: 16)
+        label.textColor = .black
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapFirstItemLabel)))
+        label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var secondItemLabel: UILabel = {
+        let label: UILabel = .init(frame: .zero)
+        label.text = "라마바"
+        label.font = .systemFont(ofSize: 16)
+        label.textColor = .black
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapSecondItemLabel)))
+        label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var thirdItemLabel: UILabel = {
+        let label: UILabel = .init(frame: .zero)
+        label.text = "사아자"
+        label.font = .systemFont(ofSize: 16)
+        label.textColor = .black
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapThirdItemLabel)))
+        label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var fourthItemLabel: UILabel = {
+        let label: UILabel = .init(frame: .zero)
+        label.text = "차카타"
+        label.font = .systemFont(ofSize: 16)
+        label.textColor = .black
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapFourthItemLabel)))
+        label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var fifthItemLabel: UILabel = {
+        let label: UILabel = .init(frame: .zero)
+        label.text = "파하"
+        label.font = .systemFont(ofSize: 16)
+        label.textColor = .black
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapFifthItemLabel)))
+        label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let topVC: SideMenuTopViewController = .init()
     
     var isExpanded: Bool = false    // ContainerVC에서만 사용
@@ -76,6 +267,7 @@ final class SideMenuViewController: UIViewController {
         
         configureBasicUI()
         setFirstSectionLayout()
+        setSecondSectionLayout()
         addPanGesture()
     }
     
@@ -115,6 +307,27 @@ final class SideMenuViewController: UIViewController {
         mainStackView.addArrangedSubview(getSeperatorLine())
     }
     
+    private func setSecondSectionLayout() {
+        mainStackView.addArrangedSubview(secondSectionContainerStackView)
+        
+        secondSectionContainerStackView.addArrangedSubview(secondSectionTitleLabel)
+        secondSectionContainerStackView.addArrangedSubview(secondSectionLabelsContainerStackView)
+    
+        secondSectionLabelsContainerStackView.addArrangedSubview(importantStackView)
+        secondSectionLabelsContainerStackView.addArrangedSubview(naverLabel)
+        secondSectionLabelsContainerStackView.addArrangedSubview(kakaoStackView)
+        
+        kakaoStackView.addArrangedSubview(kakaoItemStackView)
+        
+        kakaoItemStackView.addArrangedSubview(firstItemLabel)
+        kakaoItemStackView.addArrangedSubview(secondItemLabel)
+        kakaoItemStackView.addArrangedSubview(thirdItemLabel)
+        kakaoItemStackView.addArrangedSubview(fourthItemLabel)
+        kakaoItemStackView.addArrangedSubview(fifthItemLabel)
+        
+        mainStackView.addArrangedSubview(getSeperatorLine())
+    }
+    
     private func getSeperatorLine() -> UIView {
         let line: UIView = .init(frame: .zero)
         line.backgroundColor = .gray
@@ -135,6 +348,42 @@ final class SideMenuViewController: UIViewController {
     
     @objc private func didTapHomeLabel() {
         print("did Tap HomeLabel!")
+    }
+    
+    @objc private func didTapImportantStackView() {
+        print("did Tap importantLabel!")
+    }
+    
+    @objc private func didTapNaverLabel() {
+        print("did Tap naverLabel!")
+    }
+    
+    @objc private func didTapFoldButton() {
+        UIView.animate(withDuration: 0.3) {
+            let isShowing = self.kakaoItemStackView.isHidden
+            self.kakaoItemStackView.isHidden = !isShowing
+        }
+    }
+    
+    @objc private func didTapFirstItemLabel() {
+        print("did Tap firstItemLabel!")
+    }
+    
+    @objc private func didTapSecondItemLabel() {
+        print("did Tap secondItemLabel!")
+    }
+    
+    @objc private func didTapThirdItemLabel() {
+        print("did Tap thirdItemLabel!")
+    }
+    
+    @objc private func didTapFourthItemLabel() {
+        print("did Tap fourthItemLabel!")
+
+    }
+    
+    @objc private func didTapFifthItemLabel() {
+        print("did Tap fifthItemLabel!")
     }
     
     @objc private func hideMenu(_ sender: UIPanGestureRecognizer) {
