@@ -9,6 +9,17 @@ import UIKit
 
 final class SideMenuViewController: UIViewController {
     // MARK: - Properties
+    private lazy var scrollView: UIScrollView = {
+        let scrollView: UIScrollView = .init(frame: .zero)
+        scrollView.delegate = self
+        scrollView.backgroundColor = .clear
+        scrollView.isScrollEnabled = true
+        scrollView.bounces = true
+        scrollView.alwaysBounceVertical = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
     private lazy var settingButton: UIButton = {
         let button: UIButton = .init(frame: .zero)
         button.setImage(UIImage(named: "settingIcon"), for: .normal)
@@ -273,23 +284,33 @@ final class SideMenuViewController: UIViewController {
     
     // MARK: - Helpers
     private func configureBasicUI() {
-        view.addSubview(containerView)
-        view.addSubview(settingButton)
+        view.addSubview(scrollView)
         
-        containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        scrollView.addSubview(containerView)
+        // 스크롤영역을 설정해주기 위해 보통 이런식으로 뷰를 하나 넣고 아래와 같이 오토레이아웃을 설정해준다. 주의할 점이 contentLayoutGuide, frameLayoutGuide을 이용해야 한다는거...
+        
+        containerView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor).isActive = true
+        containerView.widthAnchor.constraint(equalTo: scrollView.frameLayoutGuide.widthAnchor).isActive = true
         
         containerView.addSubview(mainStackView)
         
-        mainStackView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        mainStackView.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor).isActive = true
         mainStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        mainStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        mainStackView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor).isActive = true
         //mainStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true  -> 주석처리 안하면 UI깨짐
         
-        settingButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        settingButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        containerView.addSubview(settingButton)
+        
+        settingButton.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor).isActive = true
+        settingButton.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         settingButton.widthAnchor.constraint(equalToConstant: 30).isActive = true
         settingButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
@@ -326,6 +347,8 @@ final class SideMenuViewController: UIViewController {
         kakaoItemStackView.addArrangedSubview(fifthItemLabel)
         
         mainStackView.addArrangedSubview(getSeperatorLine())
+        
+        mainStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
     }
     
     private func getSeperatorLine() -> UIView {
@@ -410,4 +433,14 @@ final class SideMenuViewController: UIViewController {
             break
         }
     }
+}
+
+extension SideMenuViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < -self.view.safeAreaInsets.top {
+            // 스크롤뷰의 상단 바운스를 막는다.
+            scrollView.contentOffset.y = -self.view.safeAreaInsets.top
+        }
+    }
+    
 }
