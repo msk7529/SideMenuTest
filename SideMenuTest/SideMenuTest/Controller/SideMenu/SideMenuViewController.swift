@@ -255,6 +255,16 @@ final class SideMenuViewController: UIViewController {
         return label
     }()
     
+    private lazy var tableView: UITableView = {
+        let tableView: UITableView = .init()
+        tableView.backgroundColor = .clear
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
     private let topVC: SideMenuTopViewController = .init()
     
     var isExpanded: Bool = false    // ContainerVC에서만 사용
@@ -279,6 +289,7 @@ final class SideMenuViewController: UIViewController {
         configureBasicUI()
         setFirstSectionLayout()
         setSecondSectionLayout()
+        setTableViewLayout()
         addPanGesture()
     }
     
@@ -347,6 +358,13 @@ final class SideMenuViewController: UIViewController {
         kakaoItemStackView.addArrangedSubview(fifthItemLabel)
         
         mainStackView.addArrangedSubview(getSeperatorLine())
+    }
+    
+    private func setTableViewLayout() {
+        tableView.register(SideMenuTableViewCell.self, forCellReuseIdentifier: SideMenuTableViewCell.identifier)
+        
+        mainStackView.addArrangedSubview(tableView)
+        tableView.heightAnchor.constraint(equalToConstant: 300).isActive = true
         
         mainStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
     }
@@ -432,6 +450,31 @@ final class SideMenuViewController: UIViewController {
         default:
             break
         }
+    }
+}
+
+extension SideMenuViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 4 {
+            return 100
+        }
+        return 40
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SideMenuTableViewCell.identifier, for: indexPath) as? SideMenuTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        return cell
     }
 }
 

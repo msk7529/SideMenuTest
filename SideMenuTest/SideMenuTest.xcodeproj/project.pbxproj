@@ -24,6 +24,7 @@
 		C28B6EAA26D6B242009D90FD /* HomeSecondTapVerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6EA926D6B242009D90FD /* HomeSecondTapVerticalViewController.swift */; };
 		C28B6EAE26D74B93009D90FD /* HomeSecondTapVerticalItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6EAD26D74B93009D90FD /* HomeSecondTapVerticalItem.swift */; };
 		C28B6F2526D93D24009D90FD /* SideMenuTopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6F2426D93D24009D90FD /* SideMenuTopViewController.swift */; };
+		C28B709826E6837E009D90FD /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B709726E6837E009D90FD /* SideMenuTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		C28B6EA926D6B242009D90FD /* HomeSecondTapVerticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSecondTapVerticalViewController.swift; sourceTree = "<group>"; };
 		C28B6EAD26D74B93009D90FD /* HomeSecondTapVerticalItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSecondTapVerticalItem.swift; sourceTree = "<group>"; };
 		C28B6F2426D93D24009D90FD /* SideMenuTopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTopViewController.swift; sourceTree = "<group>"; };
+		C28B709726E6837E009D90FD /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				C28B6EA226D60204009D90FD /* Transition */,
 				C28B6E9526D3C3B0009D90FD /* SideMenuViewController.swift */,
 				C28B6F2426D93D24009D90FD /* SideMenuTopViewController.swift */,
+				C28B709726E6837E009D90FD /* SideMenuTableViewCell.swift */,
 			);
 			path = SideMenu;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				C28B6E9226D3C37F009D90FD /* ContainerViewController.swift in Sources */,
 				C28B6EA126D5E5B5009D90FD /* HomeNextViewController.swift in Sources */,
 				C28B6EAE26D74B93009D90FD /* HomeSecondTapVerticalItem.swift in Sources */,
+				C28B709826E6837E009D90FD /* SideMenuTableViewCell.swift in Sources */,
 				C28B6EA826D682DD009D90FD /* HomeCustomSwitch.swift in Sources */,
 				C28B6E9826D3E9FB009D90FD /* FirstViewController.swift in Sources */,
 				C28B6E9626D3C3B0009D90FD /* SideMenuViewController.swift in Sources */,
