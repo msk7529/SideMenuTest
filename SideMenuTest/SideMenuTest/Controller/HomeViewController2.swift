@@ -44,6 +44,13 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
         return view
     }()
     
+    private let floatingStackView: UIStackView = {
+        let stackView: UIStackView = .init()
+        stackView.axis = .vertical
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private let mainStackView: UIStackView = {
         let stackView: UIStackView = .init(frame: .zero)
         stackView.axis = .vertical
@@ -75,6 +82,7 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
     }()
     
     private let bannerTestVC: HomeTopBannerTestViewController = .init()
+    private let bannerTestVC2: HomeTopBannerTestViewController = .init()
     private let verticalVC: HomeSecondTapVerticalViewController = .init()
     
     private lazy var sideMenuTransitionDelegate: SideMenuTransitionDelegate = {
@@ -109,9 +117,11 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
     
     private func initView() {
         configureBasicUI()
+        addFloatingBannerView()
         addBannerView()
         addVerticalView()
         addFooterView()
+        moveFloatingBannerViewToFront()
     }
     
     private func configureBasicUI() {
@@ -124,6 +134,12 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
         
         bgStackView.addArrangedSubview(UIView())
         bgStackView.addArrangedSubview(bgView)
+        
+        view.addSubview(floatingStackView)
+
+        floatingStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        floatingStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        floatingStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         
         view.addSubview(scrollView)
         
@@ -146,6 +162,13 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
         mainStackView.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor, constant: 6).isActive = true
         mainStackView.leadingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         mainStackView.trailingAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+    }
+    
+    private func addFloatingBannerView() {
+        self.addChild(bannerTestVC2)
+        floatingStackView.addArrangedSubview(bannerTestVC2.view)
+        bannerTestVC2.view.backgroundColor = .systemRed
+        bannerTestVC2.didMove(toParent: self)
     }
     
     private func addBannerView() {
@@ -180,6 +203,10 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
         footerStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         // 컨테이너뷰에 들어가는 마지막 요소에서는 이렇게 bottomAnchor를 컨테이너뷰에 맞춰줘야 스크롤뷰가 스크롤영역을 제대로 인식하고 UI가 안깨질수 있다.
         // containerView의 safeArea에 맞출지는 UI보고 판단.
+    }
+    
+    private func moveFloatingBannerViewToFront() {
+        self.view.bringSubviewToFront(floatingStackView)
     }
     
     // MARK: - Actions
