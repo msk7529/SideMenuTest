@@ -83,6 +83,7 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
     
     private let bannerTestVC: HomeTopBannerTestViewController = .init()
     private let bannerTestVC2: HomeTopBannerTestViewController = .init()
+    private let collectionViewTestVC: HomeCollectionViewController = .init()
     private let verticalVC: HomeSecondTapVerticalViewController = .init()
     
     private lazy var sideMenuTransitionDelegate: SideMenuTransitionDelegate = {
@@ -119,6 +120,7 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
         configureBasicUI()
         addFloatingBannerView()
         addBannerView()
+        addCollectionViewVC()
         addVerticalView()
         addFooterView()
         moveFloatingBannerViewToFront()
@@ -181,6 +183,12 @@ final class HomeViewController2: UIViewController, UIScrollViewDelegate {
         bannerTestVC.didMove(toParent: self)
         
         mainStackView.setCustomSpacing(50, after: bannerTestVC.view)
+    }
+    
+    private func addCollectionViewVC() {
+        self.addChild(collectionViewTestVC)
+        mainStackView.addArrangedSubview(collectionViewTestVC.view)
+        collectionViewTestVC.didMove(toParent: self)
     }
     
     private func addVerticalView() {

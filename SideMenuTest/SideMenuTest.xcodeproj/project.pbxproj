@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C261851B271D3E4D0018F7FE /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C261851A271D3E4C0018F7FE /* HomeCollectionViewController.swift */; };
+		C261851D271D3EE60018F7FE /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C261851C271D3EE60018F7FE /* HomeCollectionViewCell.swift */; };
 		C28B6E7D26D3C1E0009D90FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6E7C26D3C1E0009D90FD /* AppDelegate.swift */; };
 		C28B6E7F26D3C1E1009D90FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C28B6E7E26D3C1E1009D90FD /* SceneDelegate.swift */; };
 		C28B6E8626D3C1E3009D90FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C28B6E8526D3C1E3009D90FD /* Assets.xcassets */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C261851A271D3E4C0018F7FE /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController.swift; sourceTree = "<group>"; };
+		C261851C271D3EE60018F7FE /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		C28B6E7926D3C1E0009D90FD /* SideMenuTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideMenuTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C28B6E7C26D3C1E0009D90FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C28B6E7E26D3C1E1009D90FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 				C28B6E9126D3C37F009D90FD /* ContainerViewController.swift */,
 				C28B6E9326D3C3A9009D90FD /* HomeViewController.swift */,
 				C28B6EA526D61CBA009D90FD /* HomeViewController2.swift */,
+				C261851A271D3E4C0018F7FE /* HomeCollectionViewController.swift */,
+				C261851C271D3EE60018F7FE /* HomeCollectionViewCell.swift */,
 				C28B6E9E26D4E464009D90FD /* HomeTopBannerTestViewController.swift */,
 				C28B6EA926D6B242009D90FD /* HomeSecondTapVerticalViewController.swift */,
 				C28B6EA026D5E5B5009D90FD /* HomeNextViewController.swift */,
@@ -209,8 +215,10 @@
 				C28B6E7F26D3C1E1009D90FD /* SceneDelegate.swift in Sources */,
 				C28B6E9F26D4E464009D90FD /* HomeTopBannerTestViewController.swift in Sources */,
 				C28B6E9D26D49AF4009D90FD /* HomeTopBannerView.swift in Sources */,
+				C261851D271D3EE60018F7FE /* HomeCollectionViewCell.swift in Sources */,
 				C28B6EA426D6021F009D90FD /* SideMenuTransition.swift in Sources */,
 				C28B6E9226D3C37F009D90FD /* ContainerViewController.swift in Sources */,
+				C261851B271D3E4D0018F7FE /* HomeCollectionViewController.swift in Sources */,
 				C28B6EA126D5E5B5009D90FD /* HomeNextViewController.swift in Sources */,
 				C28B6EAE26D74B93009D90FD /* HomeSecondTapVerticalItem.swift in Sources */,
 				C28B709826E6837E009D90FD /* SideMenuTableViewCell.swift in Sources */,
