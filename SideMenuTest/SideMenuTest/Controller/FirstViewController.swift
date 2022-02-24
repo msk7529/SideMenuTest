@@ -30,6 +30,8 @@ final class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("merge test - feature")
+        
         self.view.backgroundColor = .systemBackground
         
         self.view.addSubview(button)
